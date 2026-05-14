@@ -17,6 +17,7 @@ body { font-family: 'Press Start 2P', cursive; }
     gap: 40px;
 }
 
+/* Título */
 #telaInicio h1 {
     font-size: 80px;
     color: #e52222;
@@ -38,6 +39,7 @@ button {
     cursor: pointer;
 }
 
+/* Efeito hover para os botões */
 button:hover { 
     background: #ff5555; 
 }
@@ -99,6 +101,7 @@ button:hover {
     background: rgba(135, 206, 235, 0.5);
 }
 
+/* Texto Game Over */
 #gameOver h2 {
     font-size: 48px;
     color: white;
