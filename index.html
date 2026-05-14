@@ -1,20 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="vieport" content="width=device-width, initial-scale=1.0">
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Mario Game</title>
+</head>
+<body>
 
-        <link rel="stylesheet" href="./style.css">
-       
+    <!-- Tela de Início -->
+    <div id="telaInicio">
+        <h1>SUPER<br>MARIO</h1>
+        <button onclick="comecar()">JOGAR</button>
+    </div>
 
-        <title>Jump Game</title>
-    </head>
-    <body>
-        <div class="game-board">
-            <img src = "imagens/clouds.png" class = "nuvens">
-            <img src = "imagens/pipe.png" class="pipe">
-            <img src = "imagens/mario.gif" class="personagem">     
-                 </div>
-         <script src="script.js" defer></script>
-    </body>
-</html>          
+    <!-- Tela do Jogo -->
+    <div class="game-board" id="gameBoard">
+        <span id="score">SCORE 0</span>
+        <img src="imagens/clouds.png" class="nuvens">
+        <img src="imagens/pipe.png" class="pipe">
+        <img src="imagens/mario.gif" class="personagem" id="mario">
+
+        <!-- GAME OVER -->
+        <div id="gameOver">
+            <h2>GAME OVER</h2>
+            <button onclick="reiniciar()">RESTART</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

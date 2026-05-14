@@ -1,35 +1,68 @@
-const personagem = document.querySelector('.personagem');
-const pipe = document.querySelector('.pipe');
+/* Variáveis para acessar os elementos do jogo */
+const mario = document.getElementById('mario');
+const pipe= document.querySelector('.pipe');
+const scoreEl= document.getElementById('score');
+const gameOver= document.getElementById('gameOver');
 
-const jump = () => {
-    personagem.classList.add('jump');
+/* Variáveis para controle de pontos e loops do jogo */
+let pontos = 0;
+let loop, contarScore;
 
-    setTimeout(() => {
-    personagem.classList.remove('jump');
-    }, 500);
+/* Função para iniciar o jogo, escondendo a tela de início 
+e mostrando o game */
+function comecar() {
+    document.getElementById('telaInicio').style.display = 'none';
+    document.getElementById('gameBoard').style.display  = 'block';
+    iniciar();
 }
 
-const loop = setInterval(() => {
+/* Função para iniciar o jogo, contando pontos e verificando colisões */
+function iniciar() {
+    pontos = 0;
 
-    const pipePosition = pipe.offsetLeft;
-    const personagemPosition = +window.getComputedStyle(personagem).bottom.replace('px', '');
+    contarScore = setInterval(() => {
+        pontos++;
+        scoreEl.textContent = 'SCORE ' + pontos;
+    }, 100);
 
-    console.log(personagem);
+    loop = setInterval(() => {
+        const canoX = pipe.offsetLeft;
+        const marioY= +getComputedStyle(mario).bottom.replace('px', '');
 
-    if (pipePosition <= 120 && pipePosition > 0  && personagemPosition < 80) {
-        pipe.style.animation = 'none';
-        pipe.style.left = `${pipePosition}px`;
+        if (canoX <= 120 && canoX > 0 && marioY < 80) {
+            clearInterval(loop);
+            clearInterval(contarScore);
 
-        personagem.style.animation = 'none';
-        personagem.style.left = `${personagemPosition}px`;
+            pipe.style.animation = 'none';
+            pipe.style.left = canoX + 'px';
 
-        personagem.src = './imagens/game-over.png';
-        personagem.style.width = '75px';
-        personagem.style.marginLeft = '50px';
+            mario.src= './imagens/game-over.png';
+            mario.style.width= '75px';
 
-        clearInterval(loop);
-    }
+            gameOver.style.display = 'flex';
+        }
+    }, 10);
+}
 
-}, 10)
+/* Função para reiniciar o jogo, escondendo o game over 
+e resetando os elementos */
+function reiniciar() {
+    gameOver.style.display = 'none';
 
-document.addEventListener('keydown', jump);    
+    mario.src= './imagens/mario.gif';
+    mario.style.width= '150px';
+    mario.style.animation= '';
+    mario.style.left= '';
+
+    pipe.style.animation='';
+    pipe.style.left = '';
+
+    iniciar();
+}
+
+/* Evento para pular o Mario, adicionando a classe de jump 
+e removendo após 500ms */
+document.addEventListener('keydown', () => {
+    mario.classList.add('jump');
+    setTimeout(() => mario.classList.remove('jump'), 500);
+});
